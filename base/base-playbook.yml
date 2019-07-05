@@ -1,0 +1,21 @@
+---
+- hosts: all
+  tasks:
+    - name: Update all packages to the latest version
+      apt:
+        upgrade: dist
+      become: true
+      become_method: sudo
+
+  tasks:
+    - name: Install KVM
+      apt: name={{item}} state=installed
+      with_items:
+        - qemu
+        - qemu-kvm
+        - libvirt-bin
+        - bridge-utils
+        - virt-manager
+      become: true
+      become_method: sudo
+
